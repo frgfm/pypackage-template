@@ -37,9 +37,7 @@ jobs:
         run: |
           pip install -e "awesome_lib[test]" --upgrade
       - name: Run unittests
-        run: |
-          cd awesome_lib && coverage run -m pytest tests/
-          cd awesome_lib && coverage xml
+        run: cd awesome_lib && coverage run -m pytest tests/ && coverage xml
       - uses: actions/upload-artifact@v2
         with:
           name: coverage-main
@@ -87,7 +85,7 @@ jobs:
         run: |
           pip install -e "awesome_lib[docs]" --upgrade
       - name: Build documentation
-        run: cd awesome_lib/docs && make docs
+        run: cd awesome_lib/ && make docs
 
       - name: Documentation sanity check
         run: test -e awesome_lib/docs/build/index.html || exit
