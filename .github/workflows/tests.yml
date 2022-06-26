@@ -32,7 +32,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt --upgrade
       - name: Generate the project
-          run: python -c "from cookiecutter.main import cookiecutter; cookiecutter('.', no_input=True)"
+        run: python -c "from cookiecutter.main import cookiecutter; cookiecutter('.', no_input=True)"
       - name: Install template dependencies
         run: |
           pip install -e "awesome_lib[test]" --upgrade
@@ -82,7 +82,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt --upgrade
       - name: Generate the project
-          run: python -c "from cookiecutter.main import cookiecutter; cookiecutter('.', no_input=True)"
+        run: python -c "from cookiecutter.main import cookiecutter; cookiecutter('.', no_input=True)"
       - name: Install template dependencies
         run: |
           pip install -e "awesome_lib[docs]" --upgrade
@@ -117,7 +117,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt --upgrade
       - name: Generate the project
-          run: python -c "from cookiecutter.main import cookiecutter; cookiecutter('.', no_input=True)"
+        run: python -c "from cookiecutter.main import cookiecutter; cookiecutter('.', no_input=True)"
       - name: Install template dependencies
         run: |
           pip install -e awesome_lib/. --upgrade
