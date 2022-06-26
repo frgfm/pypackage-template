@@ -106,28 +106,7 @@ html_theme_options = {
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ["_static"]
 
-# Add googleanalytics id
-# ref: https://github.com/orenhecht/googleanalytics/blob/master/sphinxcontrib/googleanalytics.py
-def add_ga_javascript(app, pagename, templatename, context, doctree):
-
-    metatags = context.get("metatags", "")
-    metatags += """
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id={0}"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){{dataLayer.push(arguments);}}
-  gtag('js', new Date());
-  gtag('config', '{0}');
-</script>
-    """.format(
-        app.config.googleanalytics_id
-    )
-    context["metatags"] = metatags
-
 
 def setup(app):
-    app.add_config_value("googleanalytics_id", "", "html")
     app.add_css_file("css/custom_theme.css")
     app.add_js_file("js/custom.js")
-    app.connect("html-page-context", add_ga_javascript)
