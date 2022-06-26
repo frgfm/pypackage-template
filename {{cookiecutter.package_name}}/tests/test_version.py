@@ -1,5 +1,6 @@
 import {{cookiecutter.package_name}}
 
+
 def test_version():
 	version_split = {{cookiecutter.package_name}}.__version__.split(".")
 	assert len(version_split) in (3, 4)
