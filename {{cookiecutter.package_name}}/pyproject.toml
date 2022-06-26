@@ -106,7 +106,7 @@ ignore_missing_imports = true
 
 [tool.isort]
 line_length = 120
-src_paths = ["{{cookiecutter.package_name}}", "tests"]
+src_paths = ["{{cookiecutter.package_name}}", "tests", "docs"]
 skip_glob = "**/__init__.py"
 known_third_party = []
 
