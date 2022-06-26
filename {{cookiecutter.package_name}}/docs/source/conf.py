@@ -98,6 +98,8 @@ html_theme_options = {
         },
     ],
     "source_repository": "https://github.com/{{cookiecutter.gh_user}}/{{cookiecutter.repo_name}}/",
+    "source_branch": "main",
+    "sidebar_hide_name": False,
 }
 
 

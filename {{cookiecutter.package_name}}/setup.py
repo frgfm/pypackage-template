@@ -20,6 +20,6 @@ if __name__ == "__main__":
     # Dynamically set the __version__ attribute
     cwd = Path(__file__).parent.absolute()
     with open(cwd.joinpath("{{cookiecutter.package_name}}", "version.py"), "w", encoding="utf-8") as f:
-        f.write(f"__version__ = '{VERSION}'\n")
+        f.write(f'__version__ = "{VERSION}"\n')
 
     setup(name=PKG_NAME, version=VERSION)

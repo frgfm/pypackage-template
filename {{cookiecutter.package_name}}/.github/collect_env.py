@@ -20,6 +20,7 @@ from collections import namedtuple
 
 try:
     import {{cookiecutter.package_name}}
+
     PKG_AVAILABLE = True
 except (ImportError, NameError, AttributeError, OSError):
     PKG_AVAILABLE = False
