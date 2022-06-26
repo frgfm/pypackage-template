@@ -5,4 +5,8 @@
 	"repo_name": "awesome-repo",
 	"package_name": "awesome_lib",
 	"description": "This is my awesome lib",
+	"_copy_without_render": [
+		".github/workflows/*.yml",
+		".github/workflows/*.yaml"
+	]
 }

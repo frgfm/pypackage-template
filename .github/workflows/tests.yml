@@ -1,0 +1,108 @@
+name: tests
+
+on:
+  push:
+    branches: main
+  pull_request:
+    branches: main
+
+jobs:
+  pytest:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        python: [3.8]
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python }}
+          architecture: x64
+      - name: Cache python modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-python-${{ matrix.python }}-${{ hashFiles('requirements.txt') }}-${{ hashFiles('{{cookiecutter.package_name}}/pyproject.toml') }}-test
+          restore-keys: |
+            ${{ runner.os }}-pkg-deps-${{ matrix.python }}-${{ hashFiles('requirements.txt') }}-
+      - name: Install core dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt --upgrade
+      - name: Generate the project
+        run: python -c "from cookiecutter.main import cookiecutter; cookiecutter('.', no_input=True)"
+      - name: Install template dependencies
+        run: |
+          pip install -e "awesome_lib[test]" --upgrade
+      - name: Run unittests
+        run: cd awesome_lib && coverage run -m pytest tests/
+
+  docs:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        python: [3.8]
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python }}
+          architecture: x64
+      - name: Cache python modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-python-${{ matrix.python }}-${{ hashFiles('requirements.txt') }}-${{ hashFiles('{{cookiecutter.package_name}}/pyproject.toml') }}-docs
+          restore-keys: |
+            ${{ runner.os }}-pkg-deps-${{ matrix.python }}-${{ hashFiles('requirements.txt') }}-
+      - name: Install core dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt --upgrade
+      - name: Generate the project
+        run: python -c "from cookiecutter.main import cookiecutter; cookiecutter('.', no_input=True)"
+      - name: Install template dependencies
+        run: |
+          pip install -e "awesome_lib[docs]" --upgrade
+      - name: Build documentation
+        run: sphinx-build awesome_lib/docs/source awesome_lib/docs/build -a -v
+
+      - name: Documentation sanity check
+        run: test -e awesome_lib/docs/build/index.html || exit
+
+  headers:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        python: [3.8]
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python }}
+          architecture: x64
+      - name: Cache python modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-python-${{ matrix.python }}-${{ hashFiles('requirements.txt') }}
+      - name: Install core dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt --upgrade
+      - name: Generate the project
+        run: python -c "from cookiecutter.main import cookiecutter; cookiecutter('.', no_input=True)"
+      - name: Run header verifications
+        run: cd awesome_lib && python .github/validate_headers.py

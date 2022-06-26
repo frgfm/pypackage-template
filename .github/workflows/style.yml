@@ -1,0 +1,59 @@
+name: style
+
+on:
+  push:
+    branches: main
+  pull_request:
+    branches: main
+
+jobs:
+  quality:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        python: [3.8]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python }}
+          architecture: x64
+      - name: Cache python modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-python-${{ matrix.python }}-${{ hashFiles('requirements.txt') }}-${{ hashFiles('{{cookiecutter.package_name}}/pyproject.toml') }}-quality
+          restore-keys: |
+            ${{ runner.os }}-pkg-deps-${{ matrix.python }}-${{ hashFiles('requirements.txt') }}-
+      - name: Install core dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt --upgrade
+      - name: Generate the project
+        run: python -c "from cookiecutter.main import cookiecutter; cookiecutter('.', no_input=True)"
+      - name: Install template dependencies
+        run: |
+          pip install -e "awesome_lib[quality]" --upgrade
+      - name: Run flake8
+        run: |
+          flake8 --version
+          cd awesome_lib && flake8 ./
+      - name: Run isort
+        run: |
+          isort --version
+          cd awesome_lib && isort .
+          if [ -n "$(git status --porcelain --untracked-files=no)" ]; then exit 1; else echo "All clear"; fi
+      - name: Run mypy
+        run: |
+          mypy --version
+          cd awesome_lib && mypy
+      - name: Run pydocstyle
+        run: |
+          pydocstyle --version
+          cd awesome_lib && pydocstyle awesome_lib/
+      - name: Run black
+        run: |
+          black --version
+          cd awesome_lib && black --check --diff .

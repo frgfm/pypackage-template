@@ -1,9 +1,9 @@
 # this target runs checks on all files
 quality:
-	isort . -c -v
+	isort . -c
 	flake8 ./
 	mypy .
-	pydocstyle {{cookiecutter.pacakge_name}}/
+	pydocstyle {{cookiecutter.package_name}}/
 	black --check .
 
 # this target runs checks on all files and potentially modifies some of them
@@ -17,4 +17,4 @@ test:
 
 # Check that docs can build
 docs:
-	cd docs && bash build.sh
+	sphinx-build docs/source docs/build -a -v
