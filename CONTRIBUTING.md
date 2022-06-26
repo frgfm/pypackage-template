@@ -85,30 +85,12 @@ To run all quality checks together
 make quality
 ```
 
-##### Lint verification
+#### Documentation
 
-To ensure that your incoming PR complies with the lint settings, you need to install [flake8](https://flake8.pycqa.org/en/latest/) and run the following command from the repository's root folder:
-
-```shell
-flake8 ./
-```
-This will read the `.flake8` setting file and let you know whether your commits need some adjustments.
-
-##### Import order
-
-In order to ensure there is a common import order convention, run [isort](https://github.com/PyCQA/isort) as follows:
+Finally, to check that the documentation buils correctly
 
 ```shell
-isort **/*.py
-```
-This will reorder the imports of your local files.
-
-##### Code formatting
-
-Finally, code formatting is a good practice for shareable projects. After installing [black](https://github.com/psf/black), you can run the verifications as follows:
-
-```shell
-black .
+make docs
 ```
 
 ### Submit your modifications
