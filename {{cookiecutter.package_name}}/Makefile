@@ -17,4 +17,4 @@ test:
 
 # Check that docs can build
 docs:
-	cd docs && bash build.sh
+	sphinx-build docs/source docs/build -a -v
