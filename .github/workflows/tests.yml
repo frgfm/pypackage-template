@@ -32,18 +32,18 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt --upgrade
       - name: Generate the project
-          run: python -c "from cookiecutter.main import cookiecutter; cookiecutter('.', no_input=True, output_dir='../')"
+          run: python -c "from cookiecutter.main import cookiecutter; cookiecutter('.', no_input=True)"
       - name: Install template dependencies
         run: |
-          pip install -e "../awesome_lib[test]" --upgrade
+          pip install -e "awesome_lib[test]" --upgrade
       - name: Run unittests
         run: |
-          cd ../awesome_lib && coverage run -m pytest tests/
-          cd ../awesome_lib && coverage xml
+          cd awesome_lib && coverage run -m pytest tests/
+          cd awesome_lib && coverage xml
       - uses: actions/upload-artifact@v2
         with:
           name: coverage-main
-          path: ../awesome_lib/coverage.xml
+          path: awesome_lib/coverage.xml
 
   codecov-upload:
     runs-on: ubuntu-latest
@@ -82,15 +82,15 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt --upgrade
       - name: Generate the project
-          run: python -c "from cookiecutter.main import cookiecutter; cookiecutter('.', no_input=True, output_dir='../')"
+          run: python -c "from cookiecutter.main import cookiecutter; cookiecutter('.', no_input=True)"
       - name: Install template dependencies
         run: |
-          pip install -e "../awesome_lib[docs]" --upgrade
+          pip install -e "awesome_lib[docs]" --upgrade
       - name: Build documentation
-        run: cd ../awesome_lib/docs && bash build.sh
+        run: cd awesome_lib/docs && make docs
 
       - name: Documentation sanity check
-        run: test -e ../awesome_lib/docs/build/index.html || exit
+        run: test -e awesome_lib/docs/build/index.html || exit
 
   headers:
     runs-on: ${{ matrix.os }}
@@ -117,9 +117,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt --upgrade
       - name: Generate the project
-          run: python -c "from cookiecutter.main import cookiecutter; cookiecutter('.', no_input=True, output_dir='../')"
+          run: python -c "from cookiecutter.main import cookiecutter; cookiecutter('.', no_input=True)"
       - name: Install template dependencies
         run: |
-          pip install -e "../awesome_lib" --upgrade
+          pip install -e awesome_lib/. --upgrade
       - name: Run header verifications
-        run: python .github/validate_headers.py
+        run: cd awesome_lib && python .github/validate_headers.py

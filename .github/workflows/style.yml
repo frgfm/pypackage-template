@@ -30,28 +30,28 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt --upgrade
       - name: Generate the project
-          run: python -c "from cookiecutter.main import cookiecutter; cookiecutter('.', no_input=True, output_dir='../')"
+          run: python -c "from cookiecutter.main import cookiecutter; cookiecutter('.', no_input=True)"
       - name: Install template dependencies
         run: |
-          pip install -e "../awesome_lib[quality]" --upgrade
+          pip install -e "awesome_lib[quality]" --upgrade
       - name: Run flake8
         run: |
           flake8 --version
-          flake8 ./
+          cd awesome_lib && flake8 ./
       - name: Run isort
         run: |
           isort --version
-          isort .
+          cd awesome_lib && isort .
           if [ -n "$(git status --porcelain --untracked-files=no)" ]; then exit 1; else echo "All clear"; fi
       - name: Run mypy
         run: |
           mypy --version
-          mypy torchcam/
+          cd awesome_lib && mypy
       - name: Run pydocstyle
         run: |
           pydocstyle --version
-          pydocstyle torchcam/
+          cd awesome_lib && pydocstyle awesome_lib/
       - name: Run black
         run: |
           black --version
-          black --check --diff .
+          cd awesome_lib && black --check --diff .
