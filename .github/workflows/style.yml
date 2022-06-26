@@ -20,7 +20,7 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
           architecture: x64
-      -- name: Cache python modules
+      - name: Cache python modules
         uses: actions/cache@v2
         with:
           path: ~/.cache/pip
