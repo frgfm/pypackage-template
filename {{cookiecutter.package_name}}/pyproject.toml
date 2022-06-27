@@ -90,7 +90,7 @@ exclude = ["docs*", "tests*"]
 
 
 [tool.mypy]
-files = "{{cookiecutter.package_name}}/*.py"
+files = "{{cookiecutter.package_name}}/"
 show_error_codes = true
 pretty = true
 warn_unused_ignores = true
