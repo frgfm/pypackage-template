@@ -16,5 +16,5 @@ Closes # (issue)
 - [ ] Was this discussed/approved in a Github [issue](https://github.com/{{cookiecutter.gh_user}}/{{cookiecutter.repo_name}}/issues?q=is%3Aissue) or a [discussion](https://github.com/{{cookiecutter.gh_user}}/{{cookiecutter.repo_name}}/discussions)? Please add a link to it if that's the case.
 - [ ] You have read the [contribution guidelines](https://github.com/{{cookiecutter.gh_user}}/{{cookiecutter.repo_name}}/blob/main/CONTRIBUTING.md#submitting-a-pull-request) and followed them in this PR.
 - [ ] Did you make sure to update the documentation with your changes? Here are the
-      [documentation guidelines](https://github.com/frgm/{{cookiecutter.repo_name}}/tree/main/docs).
+      [documentation guidelines](https://github.com/{{cookiecutter.gh_user}}/{{cookiecutter.repo_name}}/tree/main/docs).
 - [ ] Did you write any new necessary tests?
