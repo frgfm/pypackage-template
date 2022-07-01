@@ -99,6 +99,7 @@ html_theme_options = {
     ],
     "source_repository": "https://github.com/{{cookiecutter.gh_user}}/{{cookiecutter.repo_name}}/",
     "source_branch": "main",
+    "source_directory": "docs/source/",
     "sidebar_hide_name": False,
 }
 
