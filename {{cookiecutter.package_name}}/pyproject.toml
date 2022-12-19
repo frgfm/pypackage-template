@@ -119,3 +119,12 @@ source = ["{{cookiecutter.package_name}}"]
 [tool.black]
 line-length = 120
 target-version = ['py38']
+
+[tool.autoflake]
+remove-unused-variables = true
+remove-all-unused-imports = true
+ignore-init-module-imports = true
+
+[tool.bandit]
+exclude_dirs = [".github/collect_env.py"]
+skips = ["B101"]
