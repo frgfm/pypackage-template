@@ -13,7 +13,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        python: [3.7, 3.8]
+        python: [3.8]
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python
@@ -35,6 +35,6 @@ jobs:
       - name: Create a project
         run: python -c "from cookiecutter.main import cookiecutter; cookiecutter('.', no_input=True)"
       - name: Install template dependencies
-        run: pip install -e "awesome_lib[quality]" --upgrade
-      - name: Install template dependencies
+        run: pip install -e awesome_lib/.
+      - name: Check installation
         run: python -c "import awesome_lib; print(awesome_lib.__version__)"

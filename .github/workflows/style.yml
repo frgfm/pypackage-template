@@ -35,7 +35,7 @@ jobs:
         run: python -c "from cookiecutter.main import cookiecutter; cookiecutter('.', no_input=True)"
       - name: Install template dependencies
         run: |
-          pip install -e "awesome_lib[quality]" --upgrade
+          pip install -e "awesome_lib[quality]"
       - name: Run flake8
         run: |
           flake8 --version
@@ -57,3 +57,7 @@ jobs:
         run: |
           black --version
           cd awesome_lib && black --check --diff .
+      - name: Run bandit
+        run: |
+          bandit --version
+          cd awesome_lib && bandit -r . -c pyproject.toml
