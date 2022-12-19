@@ -5,11 +5,14 @@ quality:
 	mypy .
 	pydocstyle {{cookiecutter.package_name}}/
 	black --check .
+	bandit -r . -c pyproject.toml
+	autoflake -r .
 
 # this target runs checks on all files and potentially modifies some of them
 style:
 	isort .
 	black .
+	autoflake --in-place -r .
 
 # Run tests for the library
 test:
