@@ -1,8 +1,8 @@
 # Template for Python packages
 
 <p align="center">
-  <a href="https://github.com/frgfm/pypackage-template/actions?query=workflow%3Abuilds">
-    <img alt="CI Status" src="https://img.shields.io/github/workflow/status/frgfm/pypackage-template/builds?label=CI&logo=github&style=flat-square">
+  <a href="https://github.com/frgfm/pypackage-template/actions/workflows/builds.yml">
+    <img alt="CI Status" src="https://img.shields.io/github/actions/workflow/status/frgfm/pypackage-template/builds.yml?branch=main&label=CI&logo=github&style=flat-square">
   </a>
   <a href="https://github.com/ambv/black">
     <img src="https://img.shields.io/badge/code%20style-black-000000.svg?style=flat-square" alt="black">

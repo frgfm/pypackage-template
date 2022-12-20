@@ -1,11 +1,11 @@
 # {{cookiecutter.package_name}}
 
 <p align="center">
-  <a href="https://github.com/{{cookiecutter.gh_user}}/{{cookiecutter.repo_name}}/actions?query=workflow%3Abuilds">
-    <img alt="CI Status" src="https://img.shields.io/github/workflow/status/{{cookiecutter.gh_user}}/{{cookiecutter.repo_name}}/builds?label=CI&logo=github&style=flat-square">
+  <a href="https://github.com/{{cookiecutter.gh_user}}/{{cookiecutter.repo_name}}/actions/worflows/builds.yml">
+    <img alt="CI Status" src="https://img.shields.io/github/actions/workflow/status/{{cookiecutter.gh_user}}/{{cookiecutter.repo_name}}/builds.yml?branch=main&label=CI&logo=github&style=flat-square">
   </a>
   <a href="https://{{cookiecutter.gh_user}}.github.io/{{cookiecutter.repo_name}}">
-    <img alt="Documentation Status" src="https://img.shields.io/github/workflow/status/{{cookiecutter.gh_user}}/{{cookiecutter.repo_name}}/docs?label=docs&logo=read-the-docs&style=flat-square">
+    <img alt="Documentation Status" src="https://img.shields.io/github/actions/workflow/status/{{cookiecutter.gh_user}}/{{cookiecutter.repo_name}}/docs.yaml?branch=main&label=docs&logo=read-the-docs&style=flat-square">
   </a>
   <a href="https://codecov.io/gh/{{cookiecutter.gh_user}}/{{cookiecutter.repo_name}}">
     <img src="https://img.shields.io/codecov/c/github/{{cookiecutter.gh_user}}/{{cookiecutter.repo_name}}.svg?logo=codecov&style=flat-square" alt="Test coverage percentage">
